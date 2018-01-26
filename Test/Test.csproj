@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GivenTheOptionsDialog\GivenTheOptionsDialogBase.cs" />
     <Compile Include="GivenTheOptionsDialog\WhenDefaultDuringBuildMusicSelected.cs" />
     <Compile Include="GivenTheOptionsDialog\WhenDifferentMusicSelected.cs" />
     <Compile Include="GivenTheOptionsDialog\WhenNoMusicSelected.cs" />

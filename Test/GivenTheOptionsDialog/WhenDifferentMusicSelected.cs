@@ -6,32 +6,25 @@ namespace Test.GivenTheOptionsDialog
 {
 
   [TestFixture]
-  public class WhenDifferentMusicSelected
+  public class WhenDifferentMusicSelected : GivenTheOptionsDialogBase
   {
-
-
-    private MockRepository _Mockery;
     private Mock<IBuildMusicOptions> _FullBuildMusicOptions;
-    private GeneralOptionsUserControl _Control;
 
     [SetUp]
     public void TestSetup()
     {
+      // arrange
+      Initialize();
 
-      _Mockery = new MockRepository(MockBehavior.Loose);
       _FullBuildMusicOptions = _Mockery.Create<IBuildMusicOptions>();
       _FullBuildMusicOptions.SetupProperty(o => o.DuringBuildMusic);
       _FullBuildMusicOptions.Object.DuringBuildMusic = "someOther.mp3";
-      _Control = new GeneralOptionsUserControl();
 
     }
 
     [Test]
     public void ShouldClearCheckDefaultMusicCheckbox()
     {
-
-      // arrange
-
 
       // act
       _Control.Initialize(_FullBuildMusicOptions.Object);
@@ -45,9 +38,6 @@ namespace Test.GivenTheOptionsDialog
     [Test]
     public void ShouldSetDuringBuildMusicTextbox()
     {
-
-      // arrange
-
 
       // act
       _Control.Initialize(_FullBuildMusicOptions.Object);

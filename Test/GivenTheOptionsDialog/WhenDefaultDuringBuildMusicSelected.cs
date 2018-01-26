@@ -1,41 +1,33 @@
 ﻿using Fritz.EpicBuildMusic.Core;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test.GivenTheOptionsDialog
 {
 
   [TestFixture]
-  public class WhenDefaultDuringBuildMusicSelected
+  public class WhenDefaultDuringBuildMusicSelected : GivenTheOptionsDialogBase
   {
 
-    private MockRepository _Mockery;
     private Mock<IBuildMusicOptions> _BuildMusicOptions;
-    private GeneralOptionsUserControl _Control;
 
     [SetUp]
     public void TestSetup()
     {
-
-      _Mockery = new MockRepository(MockBehavior.Loose);
+      // arrange
+      Initialize();
       _BuildMusicOptions = _Mockery.Create<IBuildMusicOptions>();
       _BuildMusicOptions.SetupAllProperties();
       _BuildMusicOptions.Object.DuringBuildMusic = "somethingAlreadySet.mp3";
-      _Control = new GeneralOptionsUserControl();
+
+      _Control.Initialize(_BuildMusicOptions.Object);
+      _Control.DefaultMusicDuringBuild = true;
 
     }
 
     [Test]
-    public void ThenShouldClearOtherDuringBuildMusic() {
-
-      // arrange
-      _Control.Initialize(_BuildMusicOptions.Object);
-      _Control.DefaultMusicDuringBuild = true;
+    public void ThenShouldClearOtherDuringBuildMusic()
+    {
 
       // act
       _Control.PersistDuringMusicSelection();

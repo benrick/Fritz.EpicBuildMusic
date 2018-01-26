@@ -1,40 +1,29 @@
 ﻿using Fritz.EpicBuildMusic.Core;
 using Moq;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Test.GivenTheOptionsDialog
 {
 
-  [TestFixture]
-  public class WhenNoMusicSelected
+    [TestFixture]
+  public class WhenNoMusicSelected : GivenTheOptionsDialogBase
   {
-    private MockRepository _Mockery;
-    private Mock<IBuildMusicOptions> _EmptyBuildMusicOptions;
-    private GeneralOptionsUserControl _Control;
+    protected Mock<IBuildMusicOptions> _buildMusicOptions;
 
     [SetUp]
-    public void TestSetup() {
-
-      _Mockery = new MockRepository(MockBehavior.Loose);
-      _EmptyBuildMusicOptions = _Mockery.Create<IBuildMusicOptions>();
-      _Control = new GeneralOptionsUserControl();
-
+    public void TestSetup()
+    {
+      // arrange
+      Initialize();
+      _buildMusicOptions = _Mockery.Create<IBuildMusicOptions>();
     }
 
     [Test]
     public void ShouldCheckDefaultMusicCheckbox()
     {
 
-      // arrange
-
-
       // act
-      _Control.Initialize(_EmptyBuildMusicOptions.Object);
+      _Control.Initialize(_buildMusicOptions.Object);
 
       // assert
       Assert.IsTrue(_Control.DefaultMusicDuringBuild, "No music was selected, but the DefaultMusicDuringBuild checkbox was not checked");
@@ -46,11 +35,8 @@ namespace Test.GivenTheOptionsDialog
     public void ShouldEmptyDefaultMusicTextbox()
     {
 
-      // arrange
-
-
       // act
-      _Control.Initialize(_EmptyBuildMusicOptions.Object);
+      _Control.Initialize(_buildMusicOptions.Object);
 
       // assert
       Assert.IsEmpty(_Control.OtherMusicDuringBuild, "No music was selected, but the DefaultMusicDuringBuild textbox had content");
